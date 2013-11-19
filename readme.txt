@@ -8,11 +8,11 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums using the retrieved info. Video is played on a responsive lightbox . You can add as many albums as you want. It will generate the shortcodes automatically which you can copy/paste into your post or page
+This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums/galleries using the retrieved info. Video is played on a responsive lightbox.
 
 == Description ==
 
-This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums using the retrieved info. Video is played on a responsive lightbox . You can add as many albums as you want. It will generate the shortcodes automatically which you can copy/paste into your post or page
+This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums/galleries using the retrieved info. Video is played on a responsive lightbox . You can add as many albums as you want. It will generate the shortcodes automatically which you can copy/paste into your post or page
 
 = Demo =
 * http://promy.srizon.com/wp/?page_id=54

@@ -45,6 +45,10 @@ function srz_yt_get_album_api($album){
 		$idprefix = 'ytuserfav';
 		$urlprefix = "http://gdata.youtube.com/feeds/api/users/".$album['api_id']."/favorites?alt=rss";
 	}
+	else if($album['source'] == 'usersub'){
+		$idprefix = 'ytusersub';
+		$urlprefix = "http://gdata.youtube.com/feeds/api/users/".$album['api_id']."/newsubscriptionvideos?alt=rss";
+	}
 
 	$unique_id = $idprefix.$album['api_id'];
 	$unique_id2 = $unique_id.'back';

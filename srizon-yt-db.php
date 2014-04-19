@@ -75,7 +75,7 @@ class SrizonYTDB{
 	
 	static function AlbumCacheClean($id){
 		$album = SrizonYTDB::GetAlbum($id);
-		$ids = array('ytupload'.$album['api_id'],'ytuserfav'.$album['api_id']);
+		$ids = array('ytupload'.$album['api_id'],'ytuserfav'.$album['api_id'],'ytusersub'.$album['api_id']);
 		foreach($ids as $albumid){
 			delete_transient(md5($albumid));
 			delete_transient(md5($albumid.'back'));
@@ -84,7 +84,7 @@ class SrizonYTDB{
 	
 	static function SyncAlbum($id){
 		$album = SrizonYTDB::GetAlbum($id);
-		$ids = array('ytupload'.$album['api_id'],'ytuserfav'.$album['api_id']);
+		$ids = array('ytupload'.$album['api_id'],'ytuserfav'.$album['api_id'],'ytusersub'.$album['api_id']);
 		foreach($ids as $albumid){
 			delete_transient(md5($albumid));
 		}

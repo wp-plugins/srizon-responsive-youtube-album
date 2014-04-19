@@ -22,6 +22,9 @@
 			<input type="radio" name="options[source]" value="userfav"<?php if($value_arr['source'] == 'userfav') echo ' checked="checked"';?> />Youtube Username and fetch user's favorites
 		</div>
 		<div>
+			<input type="radio" name="options[source]" value="usersub"<?php if($value_arr['source'] == 'usersub') echo ' checked="checked"';?> />Youtube Username and fetch user's subscribed videos
+		</div>
+		<div>
 			You can also add Youtube <strong>playlists</strong> on the	<a href="http://www.srizon.com/wordpress-plugin/srizon-youtube-album">Pro version</a>
 		</div>
 	</div>

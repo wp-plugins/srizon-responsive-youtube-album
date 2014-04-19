@@ -2,24 +2,24 @@
 Contributors: afzal_du
 Donate link: http://www.srizon.com/wordpress-plugin/srizon-youtube-album
 Tags: Youtube, Album, Gallery, Video Album, Video Gallery, Youtube Album, Youtube Gallery
-Requires at least: 3.5
-Tested up to: 3.7
-Stable tag: 1.0.0
+Requires at least: 3.3
+Tested up to: 3.9
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums/galleries using the retrieved info. Video is played on a responsive lightbox.
+This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums using the retrieved info. Video is played on a responsive lightbox.
 
 == Description ==
 
-This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums/galleries using the retrieved info. Video is played on a responsive lightbox . You can add as many albums as you want. It will generate the shortcodes automatically which you can copy/paste into your post or page
+This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums using the retrieved info. Video is played on a responsive lightbox . You can add as many albums as you want. It will generate the shortcodes automatically which you can copy/paste into your post or page
 
 = Demo =
 * http://promy.srizon.com/wp/?page_id=54
 
 = Free Version's Limitation =
-* syncs 25 videos per channel
-* playlist is not supported (only channel uploads and favorites)
+* syncs 25 videos per channel/playlist
+* playlist is not supported (only channel uploads, subscribed videos and favorites)
 * 2 layouts available
 * pagination is not available
 
@@ -54,3 +54,5 @@ This wordpress plugin fetches your or someone else's video (uploads or favorites
 
 = 1.0.0 =
 * First Release
+= 1.1.0 =
+* Added support for user's subscribed videos

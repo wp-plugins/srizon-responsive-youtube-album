@@ -3,7 +3,7 @@
 Plugin Name: Srizon Responsive Youtube Album
 Plugin URI: http://www.srizon.com/wordpress-plugin/srizon-youtube-album
 Description: Show your Youtube Channel on your WordPress Site
-Version: 1.0.0
+Version: 1.1.0
 Author: Afzal
 Author URI: http://www.srizon.com/contact
 */

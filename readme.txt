@@ -4,7 +4,7 @@ Donate link: http://www.srizon.com/wordpress-plugin/srizon-youtube-album
 Tags: Youtube, Album, Gallery, Video Album, Video Gallery, Youtube Album, Youtube Gallery
 Requires at least: 3.3
 Tested up to: 4.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,5 +54,9 @@ This wordpress plugin fetches your or someone else's video (uploads or favorites
 
 = 1.0.0 =
 * First Release
+
 = 1.1.0 =
 * Added support for user's subscribed videos
+
+= 1.1.1 =
+* Popup Script updated

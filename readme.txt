@@ -1,35 +1,34 @@
 === Srizon Responsive Youtube Album ===
 Contributors: afzal_du
-Donate link: http://www.srizon.com/wordpress-plugin/srizon-youtube-album
+Donate link: http://www.srizon.com/srizon-responsive-youtube-album
 Tags: Youtube, Album, Gallery, Video Album, Video Gallery, Youtube Album, Youtube Gallery
 Requires at least: 3.3
-Tested up to: 4.0
-Stable tag: 1.1.1
+Tested up to: 4.1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums using the retrieved info. Video is played on a responsive lightbox.
+This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums using the retrieved info. Video is played on a responsive lightbox . You can add as many albums as you want. It will generate the shortcodes automatically which you can copy/paste into your post or page
 
 == Description ==
 
 This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums using the retrieved info. Video is played on a responsive lightbox . You can add as many albums as you want. It will generate the shortcodes automatically which you can copy/paste into your post or page
-
 = Demo =
-* http://promy.srizon.com/wp/?page_id=54
+* http://wp.srizon.com/srizon-responsive-youtube-album-demo/
 
 = Free Version's Limitation =
-* syncs 25 videos per channel/playlist
+* syncs 25 videos per channel
 * playlist is not supported (only channel uploads, subscribed videos and favorites)
 * 2 layouts available
-* pagination is not available
+
 
 = Pro Version =
 * you can sync as many videos as you want (assuming that your connection and server's memory can handle the data)
 * playlist is also supported besides channel uploads and favorites
-* 3 layouts available (one additional responsive slider besides 2 free layouts)
-* pagination is available for 2 layouts (check demo)
+* 3 layouts available (one additional responsive slider besides 2 free layouts) and more will be added soon
 
-* Go to: http://www.srizon.com/wordpress-plugin/srizon-youtube-album to get the pro version
+
+* Go to: http://www.srizon.com/srizon-responsive-youtube-album to get the pro version
 
 == Installation ==
 
@@ -54,9 +53,10 @@ This wordpress plugin fetches your or someone else's video (uploads or favorites
 
 = 1.0.0 =
 * First Release
-
 = 1.1.0 =
 * Added support for user's subscribed videos
-
 = 1.1.1 =
-* Popup Script updated
+* Lightbox Script Update
+= 1.2 =
+* Pagination style changed
+* Made compatible with latest 'Srizon Facebook Album'

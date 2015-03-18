@@ -16,7 +16,7 @@ div.vidicon{
 	top: 0;
 	left: 0;
 	height: 100%;
-	background-image: url(vidicon.png);
+	background-image: url(../images/vid_icon.png);
 	background-position: center center;
 	background-repeat: no-repeat;
 	z-index: 5;
@@ -204,3 +204,5 @@ div.respslidercontainer{
 	div.yt-twd-outer{ width: 100% !important;}
 	div.titlendesc{ width: 100% !important;}
 }
+
+/*pagination related css*/

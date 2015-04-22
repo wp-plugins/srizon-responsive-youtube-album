@@ -50,6 +50,8 @@ div.yt-fp-padding{
 	margin: 0;
 	float: left;
 	clear: both;
+    width: 100%;
+    box-sizing: border-box;
 }
 div.fpthumb, div.titlebelowthumb{
 	float: left;

@@ -53,99 +53,159 @@ function srz_yt_album_shortcode( $atts ) {
 	//else return 'will process album with id: '.$atts['id']. ' now!';
 }
 
-function srz_yt_get_album_api( $album ) {
-	$cachetime = $album['updatefeed'] * 60;
-	if ( $album['source'] == 'userupload' ) {
-		$idprefix  = 'ytupload';
-		$urlprefix = "http://gdata.youtube.com/feeds/api/users/" . $album['api_id'] . "/uploads?alt=rss";
-	} else if ( $album['source'] == 'usersub' ) {
-		$idprefix  = 'ytusersub';
-		$urlprefix = "http://gdata.youtube.com/feeds/api/users/" . $album['api_id'] . "/newsubscriptionvideos?alt=rss";
+function srz_yt_extract_id_or_username($url, &$type){
+	//first change https links to http
+	$url = str_replace('https:', 'http:', $url);
+
+	//handle format https://www.youtube.com/user/trailers
+	if(strpos($url,'http://www.youtube.com/user/') !== false){
+		$url = str_replace('http://www.youtube.com/user/','',$url);
+		$type = 'user';
+	}
+
+	//handle format https://www.youtube.com/channel/UCK7eHebP6b5JbkpX6zvJkRQ
+
+	else if(strpos($url,'http://www.youtube.com/channel/') !== false){
+		$url = str_replace('http://www.youtube.com/channel/','',$url);
+		$type = 'channel';
 	}
 	else{
-		die('video source not set or incorrect');
+		$type = '';
 	}
-	$unique_id  = $idprefix . $album['api_id'];
+
+	return $url;
+}
+
+function srz_yt_get_user_upload_playlist($userid,$key){
+	$url = 'https://www.googleapis.com/youtube/v3/channels?forUsername='.$userid.'&key='.$key.'&part=contentDetails&fields=items/contentDetails/relatedPlaylists';
+	srz_yt_debug_msg('Trying to get data from:','<a href="'.$url.'" target="_blank">'.$url.'</a>');
+	$json_str = wp_remote_get($url,array( 'timeout' => 30));
+	$json = json_decode($json_str['body']);
+	if(isset($json->error)){
+		srz_yt_debug_msg('Error:',$json->error->message);
+		return false;
+	}
+	else if(isset($json->items[0]->contentDetails->relatedPlaylists->uploads)){
+		$api_id = $json->items[0]->contentDetails->relatedPlaylists->uploads;
+		srz_yt_debug_msg('Got the ID:',$api_id);
+		return $api_id;
+	}
+	else{
+		srz_yt_debug_msg('Error:','No Uploads Found');
+		return false;
+	}
+}
+
+function srz_yt_get_channel_upload_playlist($channel_id,$key){
+	$url = 'https://www.googleapis.com/youtube/v3/channels?id='.$channel_id.'&key='.$key.'&part=contentDetails&fields=items/contentDetails/relatedPlaylists';
+	srz_yt_debug_msg('Trying to get data from:','<a href="'.$url.'" target="_blank">'.$url.'</a>');
+	$json_str = wp_remote_get($url,array( 'timeout' => 30));
+	$json = json_decode($json_str['body']);
+	if(isset($json->error)){
+		srz_yt_debug_msg('Error:',$json->error->message);
+		return false;
+	}
+	else if(isset($json->items[0]->contentDetails->relatedPlaylists->uploads)){
+		$api_id = $json->items[0]->contentDetails->relatedPlaylists->uploads;
+		srz_yt_debug_msg('Got the ID:',$api_id);
+		return $api_id;
+	}
+	else{
+		srz_yt_debug_msg('Error:','No Uploads Found');
+		return false;
+	}
+
+}
+
+function srz_yt_find_type($id, $key){
+	// see if it's a username
+	$url = 'https://www.googleapis.com/youtube/v3/channels?forUsername='.$id.'&key='.$key.'&part=id';
+	srz_yt_debug_msg('Trying to get data from:','<a href="'.$url.'" target="_blank">'.$url.'</a>');
+	$json_str = wp_remote_get($url,array( 'timeout' => 30));
+	$json = json_decode($json_str['body']);
+	if(isset($json->items[0]->id)) return 'user';
+
+	// see if it's a channel id
+	$url = 'https://www.googleapis.com/youtube/v3/channels?id='.$id.'&key='.$key.'&part=id';
+	srz_yt_debug_msg('Trying to get data from:','<a href="'.$url.'" target="_blank">'.$url.'</a>');
+	$json_str = wp_remote_get($url,array( 'timeout' => 30));
+	$json = json_decode($json_str['body']);
+	if(isset($json->items[0]->id)) return 'channel';
+
+	return '';
+}
+
+function srz_yt_get_pl_id( $album ){
+	$api_id = trim($album['api_id']);
+	$type = '';
+
+	// url entered
+	if((strpos($api_id,'http://') !== false) or (strpos($api_id,'https://') !== false)){
+		$api_id = srz_yt_extract_id_or_username($api_id, $type);
+	}
+	// bare id or username entered - for legacy support
+	else{
+		$type = srz_yt_find_type($api_id,$album['api_key']);
+	}
+
+	if($type == 'user'){
+		$pl_id = srz_yt_get_user_upload_playlist($api_id,$album['api_key']);
+	}
+	else if($type == 'channel'){
+		$pl_id = srz_yt_get_channel_upload_playlist($api_id,$album['api_key']);
+	}
+	else{
+		srz_yt_debug_msg('Error: ','Channel/Playlist URL seems incorrect - '. $album['api_id']);
+		return false;
+	}
+
+	return $pl_id;
+}
+
+function srz_yt_get_videos_from_pl_id($pl_id,$key,&$videos){
+	$url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key='.$key.'&playlistId='.$pl_id.'&fields=nextPageToken,pageInfo,items(snippet(title,description,resourceId/videoId,thumbnails/medium/url))&maxResults=25';
+	srz_yt_debug_msg('Trying to get data from:','<a href="'.$url.'" target="_blank">'.$url.'</a>');
+	$json_str = wp_remote_get($url,array( 'timeout' => 30));
+	$json = json_decode($json_str['body']);
+	$i = 0;
+	foreach($json->items as $item){
+		$videos[$i]['id'] = $item->snippet->resourceId->videoId;
+		$videos[$i]['link'] = 'https://www.youtube.com/watch?v='.$videos[$i]['id'];
+		$videos[$i]['title'] = $item->snippet->title;
+		$videos[$i]['desc'] = $item->snippet->description;
+		$videos[$i]['img'] = '<img src="' . $item->snippet->thumbnails->medium->url . '" />';
+		$i++;
+	}
+	return $videos;
+}
+
+function srz_yt_get_album_api( $album ) {
+	$cachetime = $album['updatefeed'] * 60;
+	$unique_id  = $album['api_id'];
 	$unique_id2 = $unique_id . 'back';
 	$videos     = get_transient( md5( $unique_id ) );
-	if ( ! $videos or isset( $_GET['forcesyncyt'] ) ) {
-		$contents = srz_yt_remote_to_data($urlprefix);
-		if ( ! $contents ) {
-			$contents = get_transient( md5( $unique_id2 ) );
+	if(!$videos) $videos = array();
+	if ( ! count($videos) or isset( $_GET['forcesyncyt'] ) ) {
+		$pl_id = srz_yt_get_pl_id($album);
+		if($pl_id !== false){
+			$videos = srz_yt_get_videos_from_pl_id($pl_id,$album['api_key'],$videos);
 		}
-
-		if ( ! $contents and isset( $_GET['debugsrzyt'] ) ) {
+		if ( ! count($videos) ) {
+			$videos = get_transient( md5( $unique_id2 ) );
+		}
+		if ( ! count($videos) and isset( $_GET['debugsrzyt'] ) ) {
 			echo 'Looks like your server cannot connect with youtube. Ask your hosting provider to enable remote connection or try it on another server.';
 		}
-		if ( $contents ) {
-			$videos = srz_yt_xml_to_array( $contents );
+		if ( count($videos)) {
 			set_transient( md5( $unique_id ), $videos, $cachetime );
 			set_transient( md5( $unique_id2 ), $videos, 1000000 );
 		}
 	}
-
 	return $videos;
 }
 
-function srz_yt_remote_to_data( $url ) {
-	if ( isset( $_GET['debugsrzyt'] ) ) {
-		echo 'getting remote data from:' . $url;
+function srz_yt_debug_msg($title, $message){
+	if ( isset( $_GET['debugsrzyt'] )) {
+		echo '<p>'.'<strong>' . $title . ' </strong>'. $message . '</p>';
 	}
-	$data = @file_get_contents( $url );
-
-	if ( strlen( $data ) < 500 and function_exists( 'curl_exec' ) ) {
-		require_once( dirname( __FILE__ ) . '/srizon-yt-mycurl.php' );
-		if ( isset( $_GET['debugsrzyt'] ) ) {
-			echo "\n" . 'file_get_contents failed... trying curl';
-		}
-		$ytcurl = new SrzYTMycurl( $url );
-		$ytcurl->createCurl();
-		$ytcurl->setUserAgent( '' );
-		$ytcurl->setCookiFileLocation( '' );
-		$ytcurl->setReferer( '' );
-		$data = $ytcurl->tostring();
-		if ( isset( $_GET['debugsrzyt'] ) ) {
-			echo "\n" . 'curl failed to get the api response. either the pageid or albumid is wrong or your server is blocking all remote connection functions!';
-		}
-
-	}
-
-	$data = str_replace( 'media:', 'media', $data );
-	$data = str_replace( 'app:', 'app', $data );
-	$data = str_replace( 'georss:', 'georss', $data );
-	$data = str_replace( 'gml:', 'gml', $data );
-	$data = str_replace( 'gd:', 'gd', $data );
-
-	return $data;
-}
-
-function srz_yt_xml_to_array( $contents ) {
-	if ( ! extension_loaded( 'simplexml' ) ) {
-		echo 'SimpleXML library is not loaded on this host. Ask your provider to load SimpleXML or switch to a different hosting.';
-
-		return false;
-	}
-
-	$rss = new SimpleXMLElement( $contents );
-	global $wpdb;
-	$i      = 0;
-	$videos = array();
-	foreach ( $rss->channel->item as $item ) {
-		$guid_split = parse_url( $item->link );
-		parse_str( $guid_split['query'], $temp_v );
-		$videos[ $i ]['id']    = $temp_v['v'];
-		$videos[ $i ]['title'] = (string) $item->title;
-		$videos[ $i ]['title'] = htmlspecialchars( $videos[ $i ]['title'] );
-		$videos[ $i ]['link']  = (string) $item->link;
-		$videos[ $i ]['desc']  = (string) $item->description;
-		$videos[ $i ]['desc']  = htmlspecialchars( $videos[ $i ]['desc'] );
-		$videos[ $i ]['img']   = '<img src="' . $item->mediagroup->mediathumbnail['url'] . '" />';
-		if ( 0 ) { // turn it on if https is required
-			$videos[ $i ]['img']  = str_replace( 'http:', 'https:', $videos[ $i ]['img'] );
-			$videos[ $i ]['link'] = str_replace( 'http:', 'https:', $videos[ $i ]['link'] );
-		}
-		$i ++;
-	}
-
-	return $videos;
 }

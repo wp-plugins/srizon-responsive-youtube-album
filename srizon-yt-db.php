@@ -83,7 +83,8 @@ class SrizonYTDB {
 			'trimdesc'         => '200',
 			'respslidespeed'   => '500',
 			'respslidestart'   => '0',
-			'targetheight'     => '200'
+			'targetheight'     => '200',
+			'api_key'          => 'AIzaSyBbRXlCqwT1TmkWZoh_OyuzgJHoTdoZffY'
 		);
 
 		foreach ( $value_arr as $key => $value ) {
@@ -125,15 +126,7 @@ class SrizonYTDB {
 
 	static function SyncAlbum( $id ) {
 		$album = SrizonYTDB::GetAlbum( $id );
-		$ids   = array(
-			'ytupload' . $album['api_id'],
-			'ytuserfav' . $album['api_id'],
-			'ytplaylist' . $album['api_id'],
-			'ytusersub' . $album['api_id']
-		);
-		foreach ( $ids as $albumid ) {
-			delete_transient( md5( $albumid ) );
-		}
+		delete_transient( md5( $album['api_id'] ) );
 	}
 
 	static function srz_yt_extract_ids( $lines ) {

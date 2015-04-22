@@ -3,8 +3,8 @@ Contributors: afzal_du
 Donate link: http://www.srizon.com/srizon-responsive-youtube-album
 Tags: Youtube, Album, Gallery, Video Album, Video Gallery, Youtube Album, Youtube Gallery
 Requires at least: 3.3
-Tested up to: 4.1.1
-Stable tag: 1.2
+Tested up to: 4.1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,3 +60,7 @@ This wordpress plugin fetches your or someone else's video (uploads or favorites
 = 1.2 =
 * Pagination style changed
 * Made compatible with latest 'Srizon Facebook Album'
+= 1.3 =
+* New API (V3) implemented
+* Lightbox script updated for loading a bigger video player on large screens
+* New overlay button

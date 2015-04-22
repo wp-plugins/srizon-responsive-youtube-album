@@ -6,30 +6,18 @@ SrizonYTUI::BoxFooter();
 SrizonYTUI::BoxHeader( 'box2', "Video Source Setup", true );
 ?>
 <div>
-	<div>Put your YouTube User/Channel name:</div>
+	<p><strong>Enter your channel's URL</strong></p>
+	<p><small>Login to your YouTube account and click on My Channel to get your channel's URL. Also you can go to any other channel and copy the URL</small></p>
 	<div>
 		<input type="text" name="api_id" size="30" style="width:100%;" value="<?php echo $value_arr['api_id']; ?>"/>
 	</div>
-	<div>If your channel url is <em style="color:blue;">http://www.youtube.com/user/trailers</em> then the userid is
-		<strong>trailers</strong></div>
-	<br/>
-
-	<div>
-		Use the value above as:
-	</div>
-	<div>
-		<input type="radio" name="options[source]" value="userupload"<?php if ( $value_arr['source'] == 'userupload' ) {
-			echo ' checked="checked"';
-		} ?> />Youtube Username and fetch user's uploads
-	</div>
-	<div>
-		<input type="radio" name="options[source]" value="usersub"<?php if ( $value_arr['source'] == 'usersub' ) {
-			echo ' checked="checked"';
-		} ?> />Youtube Username and fetch user's subscribed videos (Max 100 videos)
-	</div>
-	<div>
+	<p>
 		You can also add Youtube <strong>playlists</strong> on the	<a href="http://www.srizon.com/srizon-responsive-youtube-album">Pro version</a>
-	</div>
+	</p>
+	<p><strong>API Key</strong></p>
+	<input type="text" name="options[api_key]" style="width: 100%;" value="<?php echo $value_arr['api_key']; ?>"/>
+	<p>Replace the default value with your own key to avoid quota error. <a target="_blank" href="http://www.srizon.com/srizon-responsive-youtube-album-documentation#getting-api-key">Here's How</a></p>
+
 </div>
 <?php
 SrizonYTUI::BoxFooter();

@@ -356,6 +356,8 @@ div.yt-fp-padding{
     margin: 0;
     float: left;
     clear: both;
+    width: 100%;
+    box-sizing: border-box;
 }
 div.fpthumb, div.titlebelowthumb{
     float: left;
@@ -365,7 +367,7 @@ div.fpthumb, div.titlebelowthumb{
 div.titlebelowthumb{
     text-align: center;
     overflow: hidden;
-    padding-bottom: 5px;
+    padding: 5px;
 }
 
 div.yt-fp-outer{

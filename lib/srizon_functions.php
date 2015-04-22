@@ -40,15 +40,18 @@ if(!function_exists('srz_fb_set_debug_msg')) {
 
 if (!function_exists('srizon_show_pagination')) {
 	function srizon_show_pagination($per_page, $total, $scroller_id, $paging_id) {
+		$appendhash = false ; // change it to true if you want you pagination links to jump to the album area
 		if (!$total > $per_page) return;
 		require_once(dirname(__FILE__) . '/srizon_pagination.php');
 		$paginator = new SrizonPagination($per_page, $paging_id);
 		$paginator->set_total($total);
 		$url = remove_query_arg($paging_id);
 		if (strpos($url, '?')) {
-			return $paginator->page_links($url . '&', '#' . $scroller_id);
+			if($appendhash) return $paginator->page_links($url . '&', '#' . $scroller_id);
+			else return $paginator->page_links($url . '&');
 		} else {
-			return $paginator->page_links($url . '?', '#' . $scroller_id);
+			if($appendhash) return $paginator->page_links($url . '?', '#' . $scroller_id);
+			else return $paginator->page_links($url . '?');
 		}
 	}
 }

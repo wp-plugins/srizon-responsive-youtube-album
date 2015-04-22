@@ -1,0 +1,210 @@
+div.imgbox, div.imgbox a, div.imgbox a img, div.titlebelowthumb,div.vidicon{
+	position: relative;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: auto;
+}
+
+div.imgbox a{
+	float: left;
+}
+
+div.vidicon{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	background-image: url(../images/vid_icon.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	z-index: 5;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	filter:alpha(opacity=50);
+	cursor: pointer;
+}
+div.vidicon:hover{
+	opacity: 0.9;
+	-moz-opacity: 0.9;
+	filter:alpha(opacity=90);
+}
+
+div.imgbox a, div.imgbox a:hover, div.imgbox a:active, div.imgbox a:focus{
+	background:none;
+	border:none;
+	text-decoration:none;
+	font-size:0;
+}
+
+div.imgbox{
+	overflow: hidden;
+	position: relative;
+	border-collapse: separate;
+}
+
+div.yt-fp-padding{
+	position: relative;
+	border: 0;
+	margin: 0;
+	float: left;
+	clear: both;
+    width: 100%;
+    box-sizing: border-box;
+}
+div.fpthumb, div.titlebelowthumb{
+	float: left;
+	clear: both;
+}
+
+div.titlebelowthumb{
+	text-align: center;
+	overflow: hidden;
+	padding-bottom: 5px;
+}
+
+div.yt-fp-outer{
+	float: left;
+	clear: none;
+}
+div.padding2 {padding: 2px;}
+div.padding3 {padding: 3px;}
+div.padding5 {padding: 5px;}
+div.padding7 {padding: 7px;}
+div.padding10 {padding: 10px;}
+
+div.outerwidthlarge1 {width:100%;}
+div.outerwidthlarge2 {width: 50%;}
+div.outerwidthlarge3 {width: 33.3%;}
+div.outerwidthlarge4 {width: 25%;}
+div.outerwidthlarge5 {width: 20%;}
+
+div.rounding7 div.imgbox{
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+}
+
+div.rounding3 div.imgbox{
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+div.rounding5 div.imgbox{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+div.rounding10 div.imgbox{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+div.shadow10l{
+	-webkit-box-shadow: 0px 0px 10px #777;
+	-moz-box-shadow: 0px 0px 10px #777;
+	box-shadow: 0px 0px 10px #777;
+}
+
+div.shadow5l{
+	-webkit-box-shadow: 0px 0px 5px #777;
+	-moz-box-shadow: 0px 0px 5px #777;
+	box-shadow: 0px 0px 5px #777;
+}
+
+div.shadow10d{
+	-webkit-box-shadow: 0px 0px 10px #222;
+	-moz-box-shadow: 0px 0px 10px #222;
+	box-shadow: 0px 0px 10px #222;
+}
+
+div.shadow5d{
+	-webkit-box-shadow: 0px 0px 5px #222;
+	-moz-box-shadow: 0px 0px 5px #222;
+	box-shadow: 0px 0px 5px #222;
+}
+div.divider{
+	width: 95%;
+	height: 1px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	position: relative;
+	clear: both;
+	float: left;
+	-webkit-box-shadow:  0 0 5px #DDDDDD;
+	-moz-box-shadow:  0 0 5px #DDDDDD;
+	box-shadow:  0 0 5px #DDDDDD;
+}
+div.descbox{
+	width:100%;
+	float:left;
+	clear: both;
+}
+div.ratio2080 div.yt-twd-outer{
+	width: 20%;
+}
+div.ratio2080 div.titlendesc{
+	width: 80%;
+}
+div.ratio2575 div.yt-twd-outer{
+	width: 25%;
+}
+div.ratio2575 div.titlendesc{
+	width: 75%;
+}
+div.ratio3565 div.yt-twd-outer{
+	width: 35%;
+}
+div.ratio3565 div.titlendesc{
+	width: 65%;
+}
+div.ratio5050 div.yt-twd-outer{
+	width: 50%;
+}
+div.ratio5050 div.titlendesc{
+	width: 50%;
+}
+div.ratio100 div.yt-twd-outer{
+	width: 100%;
+}
+div.ratio100 div.titlendesc{
+	width: 100%;
+}
+div.yt-twd-outer{
+	margin: 0;
+	float: left;
+	clear: none;
+	padding-top: 10px;
+}
+div.titlendesc{
+	margin: 0;
+	float: left;
+	clear: right;
+}
+
+div.titlendesc div, div.titlendesc h5{
+	padding: 5px 15px !important;
+	margin: 0 !important;
+}
+
+div.respslidercontainer{
+	float: left;
+	width: 100%;
+	margin: 15px 0;
+	padding: 0;
+	position: relative;
+}
+
+@media only screen and (max-width: 767px) {
+	div.outerwidthsmall1 {width:100% !important;}
+    div.outerwidthsmall2 {width: 50% !important;}
+    div.outerwidthsmall3 {width: 33.3% !important;}
+	div.yt-twd-outer{ width: 100% !important;}
+	div.titlendesc{ width: 100% !important;}
+}
+
+/*pagination related css*/

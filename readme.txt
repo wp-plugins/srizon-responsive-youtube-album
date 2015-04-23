@@ -17,14 +17,14 @@ This wordpress plugin fetches your or someone else's video (uploads or favorites
 * http://wp.srizon.com/srizon-responsive-youtube-album-demo/
 
 = Free Version's Limitation =
-* syncs 25 videos per channel
-* playlist is not supported (only channel uploads, subscribed videos and favorites)
+* limited to 25 videos per channel/user
+* playlist is not supported (only channel/user uploads supported)
 * 2 layouts available
 
 
 = Pro Version =
-* you can sync as many videos as you want (assuming that your connection and server's memory can handle the data)
-* playlist is also supported besides channel uploads and favorites
+* You can sync as many videos as you want (assuming that your connection and server's memory can handle the data)
+* Playlists are also supported besides channel uploads. You can show any public playlist
 * 3 layouts available (one additional responsive slider besides 2 free layouts) and more will be added soon
 
 

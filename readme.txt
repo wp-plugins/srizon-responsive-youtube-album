@@ -13,6 +13,9 @@ This wordpress plugin fetches your or someone else's video (uploads or favorites
 == Description ==
 
 This wordpress plugin fetches your or someone else's video (uploads or favorites) from youtube channels and creates beautiful albums using the retrieved info. Video is played on a responsive lightbox . You can add as many albums as you want. It will generate the shortcodes automatically which you can copy/paste into your post or page
+
+[youtube https://www.youtube.com/watch?v=pkp9zDCvnjE]
+
 = Demo =
 * http://wp.srizon.com/srizon-responsive-youtube-album-demo/
 
